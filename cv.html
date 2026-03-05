@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>David Esteban — Platform Engineer</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-dark: #0a0e17;
+    --bg-card: #111827;
+    --bg-card-hover: #1a2332;
+    --accent-cyan: #06b6d4;
+    --accent-teal: #14b8a6;
+    --accent-purple: #8b5cf6;
+    --accent-orange: #f59e0b;
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    --border: #1e293b;
+    --glow-cyan: rgba(6, 182, 212, 0.15);
+    --glow-purple: rgba(139, 92, 246, 0.1);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg-dark);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Animated background grid */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image:
+      linear-gradient(rgba(6,182,212,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(6,182,212,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Gradient orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(120px);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .orb-1 { width: 500px; height: 500px; background: rgba(6,182,212,0.08); top: -100px; right: -100px; animation: float 20s ease-in-out infinite; }
+  .orb-2 { width: 400px; height: 400px; background: rgba(139,92,246,0.06); bottom: -50px; left: -50px; animation: float 25s ease-in-out infinite reverse; }
+  .orb-3 { width: 300px; height: 300px; background: rgba(245,158,11,0.04); top: 50%; left: 50%; animation: float 18s ease-in-out infinite 5s; }
+
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(30px, -30px); }
+    66% { transform: translate(-20px, 20px); }
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    text-align: center;
+    margin-bottom: 60px;
+    animation: fadeUp 0.8s ease-out;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .terminal-tag {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--accent-cyan);
+    background: rgba(6,182,212,0.08);
+    border: 1px solid rgba(6,182,212,0.2);
+    padding: 6px 16px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+
+  .terminal-tag .blink {
+    animation: blink 1s step-end infinite;
+  }
+
+  @keyframes blink {
+    50% { opacity: 0; }
+  }
+
+  .hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 800;
+    letter-spacing: -1px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .hero h1 .accent {
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-teal));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero .subtitle {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+  }
+
+  .hero .tagline {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ─── SECTION TITLES ─── */
+  .section-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--accent-cyan);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--border), transparent);
+  }
+
+  /* ─── ABOUT ─── */
+  .about-section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease-out 0.15s both;
+  }
+
+  .about-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 32px;
+  }
+
+  .about-content p {
+    font-size: 0.92rem;
+    color: var(--text-secondary);
+    line-height: 1.8;
+    margin-bottom: 16px;
+  }
+
+  .about-content p strong {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .about-content p em {
+    color: var(--accent-cyan);
+    font-style: italic;
+  }
+
+  .diff-block {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border);
+  }
+
+  .diff-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent-purple);
+    margin-bottom: 20px;
+  }
+
+  .diff-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+
+  .diff-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    padding: 16px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+  }
+
+  .diff-item:hover {
+    background: rgba(6,182,212,0.04);
+    border-color: rgba(6,182,212,0.15);
+  }
+
+  .diff-icon {
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .diff-item strong {
+    display: block;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .diff-item p {
+    font-size: 0.78rem !important;
+    color: var(--text-muted) !important;
+    line-height: 1.55 !important;
+    margin-bottom: 0 !important;
+  }
+
+  /* ─── DOMAINS ─── */
+  .domains-section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease-out 0.18s both;
+  }
+
+  .domains-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .domain-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 26px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+
+  .domain-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--domain-color);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .domain-card:hover {
+    border-color: var(--domain-color);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .domain-card:hover::after { opacity: 1; }
+
+  .domain-icon {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+  }
+
+  .domain-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+  }
+
+  .domain-card p {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  /* ─── STACK GRID ─── */
+  .stack-section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease-out 0.2s both;
+  }
+
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .stack-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 14px;
+    text-align: center;
+    transition: all 0.3s ease;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stack-item::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-teal));
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .stack-item:hover {
+    background: var(--bg-card-hover);
+    border-color: rgba(6,182,212,0.3);
+    transform: translateY(-2px);
+  }
+
+  .stack-item:hover::before { opacity: 1; }
+
+  .stack-item .icon {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .stack-item .name {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .stack-item .category {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+  }
+
+  /* ─── EXPERIENCE CARDS ─── */
+  .experience-section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease-out 0.3s both;
+  }
+
+  .exp-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+
+  .exp-card:hover {
+    border-color: rgba(6,182,212,0.25);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .exp-card .role {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .exp-card .context {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+  }
+
+  .exp-card .desc {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  .exp-card .desc strong {
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  /* ─── PROJECTS ─── */
+  .projects-section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease-out 0.4s both;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .project-card:hover {
+    border-color: rgba(139,92,246,0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+  }
+
+  .project-card .proj-icon {
+    font-size: 1.8rem;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .project-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .project-card p {
+    font-size: 0.82rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .project-card .tech-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+
+  .tech-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    padding: 3px 10px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .tech-tag.highlight {
+    border-color: rgba(6,182,212,0.3);
+    color: var(--accent-cyan);
+    background: rgba(6,182,212,0.06);
+  }
+
+  /* ─── SOFT SKILLS ─── */
+  .soft-section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease-out 0.5s both;
+  }
+
+  .soft-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .soft-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    transition: all 0.3s ease;
+  }
+
+  .soft-card:hover {
+    border-color: rgba(245,158,11,0.3);
+    background: var(--bg-card-hover);
+  }
+
+  .soft-card .soft-icon {
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .soft-card h4 {
+    font-size: 0.88rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  .soft-card p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ─── FOOTER CTA ─── */
+  .footer-cta {
+    text-align: center;
+    padding: 40px 0;
+    animation: fadeUp 0.8s ease-out 0.6s both;
+  }
+
+  .footer-cta .cta-text {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .cta-btn {
+    display: inline-block;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--bg-dark);
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-teal));
+    padding: 14px 36px;
+    border-radius: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(6,182,212,0.3);
+  }
+
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(6,182,212,0.4);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 640px) {
+    .container { padding: 24px 16px 60px; }
+    .stack-grid { grid-template-columns: repeat(3, 1fr); }
+    .project-grid { grid-template-columns: 1fr; }
+    .soft-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="terminal-tag">~/david-esteban <span class="blink">▌</span></div>
+    <h1>David <span class="accent">Esteban</span></h1>
+    <p class="subtitle">Platform Engineer · DevOps · Cloud Native</p>
+    <p class="tagline">+10 ans d'expérience en infra, DevOps & SRE — aujourd'hui focalisé sur le Platform Engineering.</p>
+  </header>
+
+  <!-- ABOUT -->
+  <section class="about-section">
+    <div class="section-title">// À propos</div>
+    <div class="about-card">
+      <div class="about-content">
+        <p>Je viens du terrain. Avant de designer des plateformes, j'ai passé des années à <strong>opérer des systèmes en production</strong>, à être bipé la nuit, à debugger des clusters à chaud. C'est cette expérience SRE/DevOps de première ligne qui façonne mon approche du platform engineering aujourd'hui.</p>
+
+        <p><strong>Moins de friction, plus d'autonomie.</strong> Chaque brique que je pose doit simplifier la vie de ceux qui livrent du code. Golden paths, self-service, GitOps — tout converge vers un seul objectif : que les équipes shippent vite et en sécurité, sans dépendance ni attente.</p>
+
+        <div class="diff-block">
+          <div class="diff-title">Ce qui me différencie</div>
+          <div class="diff-grid">
+            <div class="diff-item">
+              <span class="diff-icon">⚡</span>
+              <div>
+                <strong>Production-first</strong>
+                <p>Je ne théorise pas — chaque brique que je propose, je l'ai opérée en prod. Cilium en L7, etcd recovery, ArgoCD at scale : du vécu, pas du PoC.</p>
+              </div>
+            </div>
+            <div class="diff-item">
+              <span class="diff-icon">🧬</span>
+              <div>
+                <strong>Full-stack platform</strong>
+                <p>Du réseau eBPF au portail développeur Backstage, je maîtrise toute la chaîne — pas juste un layer. C'est rare de trouver quelqu'un qui fait le lien entre Crossplane compositions et l'UX développeur.</p>
+              </div>
+            </div>
+            <div class="diff-item">
+              <span class="diff-icon">🔐</span>
+              <div>
+                <strong>Security-aware</strong>
+                <p>Analyse de CVE, re-encryption TLS, collaboration étroite avec les équipes sécu — la sécurité n'est pas un afterthought, c'est intégré dès le design.</p>
+              </div>
+            </div>
+            <div class="diff-item">
+              <span class="diff-icon">🎯</span>
+              <div>
+                <strong>Orienté impact développeur</strong>
+                <p>Mon KPI ce n'est pas le nombre de pods qui tournent, c'est le temps qu'un dev met pour passer d'une idée à un déploiement en production.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK TECHNIQUE -->
+  <section class="domains-section">
+    <div class="section-title">// Domaines de prédilection</div>
+    <div class="domains-grid">
+      <div class="domain-card" style="--domain-color: var(--accent-cyan);">
+        <div class="domain-icon">☸️</div>
+        <h3>Kubernetes & Container Orchestration</h3>
+        <p>Clusters multi-environnements, RKE2, Kapsule, gestion du lifecycle, upgrades zero-downtime, etcd recovery. Le socle de tout ce que je construis.</p>
+      </div>
+      <div class="domain-card" style="--domain-color: var(--accent-teal);">
+        <div class="domain-icon">🔄</div>
+        <h3>GitOps & CI/CD</h3>
+        <p>ArgoCD comme source de vérité, GitLab CI pipelines industrialisées, sync waves, app-of-apps pattern. Le code drive l'infra, pas l'inverse.</p>
+      </div>
+      <div class="domain-card" style="--domain-color: var(--accent-purple);">
+        <div class="domain-icon">🏗️</div>
+        <h3>Infrastructure as Code</h3>
+        <p>Crossplane compositions, XRDs, providers Scaleway — de l'infra déclarative, versionnée, reviewable, qui vit dans Git comme le reste du code.</p>
+      </div>
+      <div class="domain-card" style="--domain-color: var(--accent-orange);">
+        <div class="domain-icon">📊</div>
+        <h3>Observabilité & Monitoring</h3>
+        <p>kube-prometheus-stack, Grafana dashboards, Hubble pour la couche réseau, alerting intelligent. Pas juste des métriques — de la visibilité actionnable.</p>
+      </div>
+      <div class="domain-card" style="--domain-color: #ef4444;">
+        <div class="domain-icon">🔐</div>
+        <h3>Sécurité Cloud Native</h3>
+        <p>Analyse CVE proactive, re-encryption TLS end-to-end, NetworkPolicies Cilium, scans d'images dans la CI. La sécu intégrée dans le workflow, pas à côté.</p>
+      </div>
+      <div class="domain-card" style="--domain-color: #22c55e;">
+        <div class="domain-icon">🐘</div>
+        <h3>Database Cloud Native</h3>
+        <p>CloudNativePG sur Kubernetes, backup Barman vers S3, provisioning self-service via Crossplane. PostgreSQL en prod, opéré comme du code.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK TECHNIQUE -->
+  <section class="stack-section">
+    <div class="section-title">// Stack technique</div>
+    <div class="stack-grid">
+      <div class="stack-item">
+        <span class="icon">☸️</span>
+        <span class="name">Kubernetes</span>
+        <span class="category">Orchestration</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🚀</span>
+        <span class="name">ArgoCD</span>
+        <span class="category">GitOps</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🔀</span>
+        <span class="name">GitLab CI/CD</span>
+        <span class="category">Pipeline</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🧩</span>
+        <span class="name">Crossplane</span>
+        <span class="category">IaC / Control Plane</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🛡️</span>
+        <span class="name">Cilium</span>
+        <span class="category">Networking / eBPF</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🐘</span>
+        <span class="name">CloudNativePG</span>
+        <span class="category">Database</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🎭</span>
+        <span class="name">Backstage</span>
+        <span class="category">Dev Portal</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🌐</span>
+        <span class="name">Scaleway</span>
+        <span class="category">Cloud Provider</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🐄</span>
+        <span class="name">Rancher / RKE2</span>
+        <span class="category">K8s Management</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">📊</span>
+        <span class="name">Grafana</span>
+        <span class="category">Observability</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🔭</span>
+        <span class="name">Hubble</span>
+        <span class="category">Network Obs.</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🌉</span>
+        <span class="name">Gateway API</span>
+        <span class="category">Ingress / Mesh</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section class="experience-section">
+    <div class="section-title">// Expérience</div>
+
+    <div class="exp-card">
+      <div class="role">Platform Engineer</div>
+      <div class="context">Cloud Native · Kubernetes · Self-Service Infrastructure</div>
+      <div class="desc">
+        Conception et opération d'une <strong>Internal Developer Platform</strong> complète : orchestration Kubernetes multi-cluster (RKE2 + Scaleway Kapsule), déploiement continu via <strong>ArgoCD</strong> en mode GitOps, provisioning d'infrastructure déclaratif avec <strong>Crossplane</strong>, et portail développeur <strong>Backstage</strong> pour l'autonomie des équipes. Gestion du réseau et de la sécurité avec <strong>Cilium</strong> et Gateway API, observabilité full-stack avec Hubble, Prometheus et Grafana.
+      </div>
+    </div>
+
+    <div class="exp-card">
+      <div class="role">DevOps Engineer</div>
+      <div class="context">CI/CD · Automatisation · Sécurité</div>
+      <div class="desc">
+        Mise en place et maintenance de pipelines <strong>GitLab CI/CD</strong> robustes, intégration de linting (hadolint), scans de sécurité (CVE), et gouvernance des builds Docker. Analyse proactive de vulnérabilités (IngressNightmare CVE-2025-1974, faux positifs SQLite/CNPG). Collaboration étroite avec les équipes sécurité pour la remédiation et la conformité.
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETS CLÉS -->
+  <section class="projects-section">
+    <div class="section-title">// Projets clés</div>
+    <div class="project-grid">
+
+      <div class="project-card">
+        <span class="proj-icon">🏗️</span>
+        <h3>Self-Service CNPG sur Scaleway</h3>
+        <p>Plateforme de provisioning automatique de clusters PostgreSQL cloud-native via Crossplane + Backstage, avec backup Barman sur Object Storage S3 Scaleway.</p>
+        <div class="tech-tags">
+          <span class="tech-tag highlight">Crossplane</span>
+          <span class="tech-tag highlight">CNPG</span>
+          <span class="tech-tag">Backstage</span>
+          <span class="tech-tag">Scaleway S3</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="proj-icon">🔒</span>
+        <h3>Cilium Gateway API + TLS</h3>
+        <p>Configuration complète de Cilium avec Gateway API : TLS multi-certificats, TLSRoute, BackendTLSPolicy pour re-encryption ArgoCD, et observabilité réseau via Hubble.</p>
+        <div class="tech-tags">
+          <span class="tech-tag highlight">Cilium</span>
+          <span class="tech-tag highlight">Gateway API</span>
+          <span class="tech-tag">TLS</span>
+          <span class="tech-tag">Hubble</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="proj-icon">📈</span>
+        <h3>Observabilité Full-Stack</h3>
+        <p>Déploiement d'un stack complet : kube-prometheus-stack, Grafana dashboards, Hubble pour le réseau, alerting et métriques end-to-end sur l'ensemble de la plateforme.</p>
+        <div class="tech-tags">
+          <span class="tech-tag highlight">Prometheus</span>
+          <span class="tech-tag highlight">Grafana</span>
+          <span class="tech-tag">Hubble</span>
+          <span class="tech-tag">Alerting</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="proj-icon">🔧</span>
+        <h3>Remédiation etcd & RKE2</h3>
+        <p>Diagnostic et résolution d'un nœud etcd défaillant dans un cluster RKE2 managé par Rancher, avec restauration de la cohérence du quorum sans downtime.</p>
+        <div class="tech-tags">
+          <span class="tech-tag highlight">RKE2</span>
+          <span class="tech-tag highlight">etcd</span>
+          <span class="tech-tag">Rancher</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOFT SKILLS -->
+  <section class="soft-section">
+    <div class="section-title">// Leadership & Soft Skills</div>
+    <div class="soft-grid">
+      <div class="soft-card">
+        <span class="soft-icon">🧭</span>
+        <div>
+          <h4>Vision plateforme</h4>
+          <p>Capacité à définir et porter une stratégie IDP alignée sur les besoins des développeurs.</p>
+        </div>
+      </div>
+      <div class="soft-card">
+        <span class="soft-icon">🤝</span>
+        <div>
+          <h4>Collaboration transverse</h4>
+          <p>Pont entre dev, ops et sécurité — communication fluide dans des environnements complexes.</p>
+        </div>
+      </div>
+      <div class="soft-card">
+        <span class="soft-icon">🔍</span>
+        <div>
+          <h4>Troubleshooting avancé</h4>
+          <p>Diagnostic méthodique de problèmes complexes (CRD drift, etcd, networking L4/L7).</p>
+        </div>
+      </div>
+      <div class="soft-card">
+        <span class="soft-icon">📚</span>
+        <div>
+          <h4>Documentation & partage</h4>
+          <p>Culture de la documentation technique et du knowledge sharing au sein des équipes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CTA -->
+  <footer class="footer-cta">
+    <p class="cta-text">$ echo "Let's build something great together"</p>
+    <a href="https://www.linkedin.com/in/david-esteban-123b93103/" target="_blank" class="cta-btn">Connecter sur LinkedIn →</a>
+  </footer>
+
+</div>
+
+</body>
+</html>
