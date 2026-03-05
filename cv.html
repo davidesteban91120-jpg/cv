@@ -635,7 +635,7 @@
       <div class="domain-card" style="--domain-color: var(--accent-cyan);">
         <div class="domain-icon">☸️</div>
         <h3>Kubernetes & Container Orchestration</h3>
-        <p>Clusters multi-environnements, RKE2, Kapsule, gestion du lifecycle, upgrades zero-downtime, etcd recovery. Le socle de tout ce que je construis.</p>
+        <p>Clusters multi-environnements, RKE2, Cluster API avec Cluster Autoscaler, gestion du lifecycle, upgrades zero-downtime, etcd recovery. Le socle de tout ce que je construis.</p>
       </div>
       <div class="domain-card" style="--domain-color: var(--accent-teal);">
         <div class="domain-icon">🔄</div>
@@ -673,6 +673,21 @@
         <span class="icon">☸️</span>
         <span class="name">Kubernetes</span>
         <span class="category">Orchestration</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🟠</span>
+        <span class="name">EKS</span>
+        <span class="category">AWS Managed K8s</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">🔵</span>
+        <span class="name">AKS</span>
+        <span class="category">Azure Managed K8s</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">⚙️</span>
+        <span class="name">Cluster API</span>
+        <span class="category">K8s Lifecycle</span>
       </div>
       <div class="stack-item">
         <span class="icon">🚀</span>
@@ -721,6 +736,11 @@
       </div>
       <div class="stack-item">
         <span class="icon">🔭</span>
+        <span class="name">OpenTelemetry</span>
+        <span class="category">Traces & Metrics</span>
+      </div>
+      <div class="stack-item">
+        <span class="icon">👁️</span>
         <span class="name">Hubble</span>
         <span class="category">Network Obs.</span>
       </div>
@@ -737,18 +757,18 @@
     <div class="section-title">// Expérience</div>
 
     <div class="exp-card">
-      <div class="role">Platform Engineer</div>
+      <div class="role">Tech Lead — Platform Engineering</div>
       <div class="context">Cloud Native · Kubernetes · Self-Service Infrastructure</div>
       <div class="desc">
-        Conception et opération d'une <strong>Internal Developer Platform</strong> complète : orchestration Kubernetes multi-cluster (RKE2 + Scaleway Kapsule), déploiement continu via <strong>ArgoCD</strong> en mode GitOps, provisioning d'infrastructure déclaratif avec <strong>Crossplane</strong>, et portail développeur <strong>Backstage</strong> pour l'autonomie des équipes. Gestion du réseau et de la sécurité avec <strong>Cilium</strong> et Gateway API, observabilité full-stack avec Hubble, Prometheus et Grafana.
+        Conception et pilotage d'une <strong>Internal Developer Platform</strong> complète : orchestration Kubernetes multi-cluster (EKS, AKS, RKE2, Scaleway) via <strong>Cluster API</strong> et Cluster Autoscaler, déploiement continu via <strong>ArgoCD</strong> en mode GitOps, provisioning d'infrastructure déclaratif avec <strong>Crossplane</strong>, et portail développeur <strong>Backstage</strong> pour l'autonomie des équipes. Gestion du réseau et de la sécurité avec <strong>Cilium</strong> et Gateway API, observabilité full-stack avec OpenTelemetry, Hubble, Prometheus et Grafana.
       </div>
     </div>
 
     <div class="exp-card">
-      <div class="role">DevOps Engineer</div>
-      <div class="context">CI/CD · Automatisation · Sécurité</div>
+      <div class="role">Tech Lead — DevOps & SRE</div>
+      <div class="context">CI/CD · Automatisation · Sécurité · Multi-Cloud</div>
       <div class="desc">
-        Mise en place et maintenance de pipelines <strong>GitLab CI/CD</strong> robustes, intégration de linting (hadolint), scans de sécurité (CVE), et gouvernance des builds Docker. Analyse proactive de vulnérabilités (IngressNightmare CVE-2025-1974, faux positifs SQLite/CNPG). Collaboration étroite avec les équipes sécurité pour la remédiation et la conformité.
+        Mise en place et industrialisation de pipelines <strong>GitLab CI/CD</strong>, intégration de linting (hadolint), scans de sécurité (CVE), et gouvernance des builds Docker. Pilotage de migrations d'infrastructure multi-cloud. Analyse proactive de vulnérabilités (IngressNightmare CVE-2025-1974, faux positifs SQLite/CNPG). Référent technique auprès des équipes sécurité pour la remédiation et la conformité.
       </div>
     </div>
   </section>
@@ -759,49 +779,51 @@
     <div class="project-grid">
 
       <div class="project-card">
-        <span class="proj-icon">🏗️</span>
-        <h3>Self-Service CNPG sur Scaleway</h3>
-        <p>Plateforme de provisioning automatique de clusters PostgreSQL cloud-native via Crossplane + Backstage, avec backup Barman sur Object Storage S3 Scaleway.</p>
+        <span class="proj-icon">☸️</span>
+        <h3>Automatisation déploiement clusters Kubernetes</h3>
+        <p>Provisioning automatisé de clusters Kubernetes via Cluster API et Crossplane, avec lifecycle management complet (upgrades, scaling, rotation) piloté depuis Git.</p>
         <div class="tech-tags">
+          <span class="tech-tag highlight">Cluster API</span>
           <span class="tech-tag highlight">Crossplane</span>
-          <span class="tech-tag highlight">CNPG</span>
-          <span class="tech-tag">Backstage</span>
-          <span class="tech-tag">Scaleway S3</span>
+          <span class="tech-tag">EKS</span>
+          <span class="tech-tag">AKS</span>
+          <span class="tech-tag">Cluster Autoscaler</span>
         </div>
       </div>
 
       <div class="project-card">
-        <span class="proj-icon">🔒</span>
-        <h3>Cilium Gateway API + TLS</h3>
-        <p>Configuration complète de Cilium avec Gateway API : TLS multi-certificats, TLSRoute, BackendTLSPolicy pour re-encryption ArgoCD, et observabilité réseau via Hubble.</p>
+        <span class="proj-icon">🔄</span>
+        <h3>GitOps at Scale</h3>
+        <p>Mise en place d'une architecture GitOps complète avec ArgoCD : app-of-apps, sync waves, multi-cluster, gestion des secrets et promotion d'environnements automatisée.</p>
         <div class="tech-tags">
-          <span class="tech-tag highlight">Cilium</span>
-          <span class="tech-tag highlight">Gateway API</span>
-          <span class="tech-tag">TLS</span>
-          <span class="tech-tag">Hubble</span>
+          <span class="tech-tag highlight">ArgoCD</span>
+          <span class="tech-tag highlight">GitLab CI</span>
+          <span class="tech-tag">Kustomize</span>
+          <span class="tech-tag">Helm</span>
         </div>
       </div>
 
       <div class="project-card">
-        <span class="proj-icon">📈</span>
-        <h3>Observabilité Full-Stack</h3>
-        <p>Déploiement d'un stack complet : kube-prometheus-stack, Grafana dashboards, Hubble pour le réseau, alerting et métriques end-to-end sur l'ensemble de la plateforme.</p>
+        <span class="proj-icon">🔀</span>
+        <h3>Migration Azure → Scaleway</h3>
+        <p>Pilotage de la migration d'infrastructure d'Azure (AKS) vers Scaleway : refonte des pipelines, adaptation des workloads, déploiement via Cluster API, migration des données et bascule progressive sans interruption de service.</p>
         <div class="tech-tags">
-          <span class="tech-tag highlight">Prometheus</span>
-          <span class="tech-tag highlight">Grafana</span>
-          <span class="tech-tag">Hubble</span>
-          <span class="tech-tag">Alerting</span>
+          <span class="tech-tag highlight">AKS</span>
+          <span class="tech-tag highlight">Scaleway</span>
+          <span class="tech-tag">Migration</span>
+          <span class="tech-tag">Zero-downtime</span>
         </div>
       </div>
 
       <div class="project-card">
-        <span class="proj-icon">🔧</span>
-        <h3>Remédiation etcd & RKE2</h3>
-        <p>Diagnostic et résolution d'un nœud etcd défaillant dans un cluster RKE2 managé par Rancher, avec restauration de la cohérence du quorum sans downtime.</p>
+        <span class="proj-icon">🌍</span>
+        <h3>Stratégie Multi-Cloud</h3>
+        <p>Design et implémentation d'une architecture multi-cloud (AWS, Azure, Scaleway) avec abstraction des providers via Crossplane, networking unifié Cilium et observabilité centralisée.</p>
         <div class="tech-tags">
-          <span class="tech-tag highlight">RKE2</span>
-          <span class="tech-tag highlight">etcd</span>
-          <span class="tech-tag">Rancher</span>
+          <span class="tech-tag highlight">Multi-Cloud</span>
+          <span class="tech-tag highlight">Crossplane</span>
+          <span class="tech-tag">Cilium</span>
+          <span class="tech-tag">OpenTelemetry</span>
         </div>
       </div>
 
