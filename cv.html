@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>David Esteban — Platform Engineer</title>
+<title>David Esteban — Tech Lead Platform Engineering</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -132,9 +132,41 @@
     font-size: 0.85rem;
     color: var(--text-muted);
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 28px;
     line-height: 1.7;
   }
+
+  /* ─── CONTACT BAR ─── */
+  .contact-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: rgba(255,255,255,0.02);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .contact-item:hover {
+    border-color: rgba(6,182,212,0.3);
+    color: var(--accent-cyan);
+    background: rgba(6,182,212,0.05);
+  }
+
+  .contact-item .ci-icon { font-size: 0.9rem; }
 
   /* ─── SECTION TITLES ─── */
   .section-title {
@@ -308,17 +340,40 @@
     animation: fadeUp 0.8s ease-out 0.2s both;
   }
 
+  .stack-category {
+    margin-bottom: 28px;
+  }
+
+  .stack-category-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .stack-category-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
   .stack-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
   }
 
   .stack-item {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 16px 14px;
+    padding: 14px 12px;
     text-align: center;
     transition: all 0.3s ease;
     cursor: default;
@@ -345,24 +400,24 @@
   .stack-item:hover::before { opacity: 1; }
 
   .stack-item .icon {
-    font-size: 1.6rem;
-    margin-bottom: 8px;
+    font-size: 1.4rem;
+    margin-bottom: 6px;
     display: block;
   }
 
   .stack-item .name {
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 600;
     color: var(--text-primary);
   }
 
   .stack-item .category {
     font-family: 'JetBrains Mono', monospace;
-    font-size: 0.6rem;
+    font-size: 0.58rem;
     color: var(--text-muted);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-top: 4px;
+    margin-top: 3px;
   }
 
   /* ─── EXPERIENCE CARDS ─── */
@@ -386,27 +441,96 @@
     box-shadow: 0 8px 32px rgba(0,0,0,0.3);
   }
 
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
   .exp-card .role {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 700;
+  }
+
+  .exp-card .period {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    color: var(--accent-cyan);
+    background: rgba(6,182,212,0.08);
+    border: 1px solid rgba(6,182,212,0.2);
+    padding: 3px 10px;
+    border-radius: 12px;
+    white-space: nowrap;
+  }
+
+  .exp-card .company {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--accent-teal);
     margin-bottom: 4px;
   }
 
   .exp-card .context {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin-bottom: 14px;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
   }
 
-  .exp-card .desc {
-    font-size: 0.88rem;
-    color: var(--text-secondary);
-    line-height: 1.7;
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .exp-card .desc strong {
+  .exp-bullets li {
+    font-size: 0.86rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent-cyan);
+    font-size: 0.75rem;
+    top: 3px;
+  }
+
+  .exp-bullets li strong {
     color: var(--text-primary);
-    font-weight: 500;
+    font-weight: 600;
+  }
+
+  .exp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+
+  .exp-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    padding: 3px 9px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .exp-tag.hl {
+    border-color: rgba(6,182,212,0.3);
+    color: var(--accent-cyan);
+    background: rgba(6,182,212,0.05);
   }
 
   /* ─── PROJECTS ─── */
@@ -524,6 +648,56 @@
     line-height: 1.5;
   }
 
+  /* ─── FORMATION ─── */
+  .formation-section {
+    margin-bottom: 56px;
+    animation: fadeUp 0.8s ease-out 0.55s both;
+  }
+
+  .formation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 14px;
+  }
+
+  .formation-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px 24px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    transition: all 0.3s ease;
+  }
+
+  .formation-card:hover {
+    border-color: rgba(139,92,246,0.3);
+    background: var(--bg-card-hover);
+  }
+
+  .formation-year {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-purple);
+    flex-shrink: 0;
+    min-width: 48px;
+  }
+
+  .formation-info h4 {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .formation-info p {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
   /* ─── FOOTER CTA ─── */
   .footer-cta {
     text-align: center;
@@ -563,6 +737,8 @@
     .stack-grid { grid-template-columns: repeat(3, 1fr); }
     .project-grid { grid-template-columns: 1fr; }
     .soft-grid { grid-template-columns: 1fr; }
+    .contact-bar { gap: 10px; }
+    .exp-header { flex-direction: column; }
   }
 </style>
 </head>
@@ -578,8 +754,14 @@
   <header class="hero">
     <div class="terminal-tag">~/david-esteban <span class="blink">▌</span></div>
     <h1>David <span class="accent">Esteban</span></h1>
-    <p class="subtitle">Platform Engineer · DevOps · Cloud Native</p>
-    <p class="tagline">+10 ans d'expérience en infra, DevOps & SRE — aujourd'hui focalisé sur le Platform Engineering.</p>
+    <p class="subtitle">Tech Lead Platform Engineering · DevOps · Cloud Native</p>
+    <p class="tagline">+12 ans d'expérience en infra, DevOps & SRE — aujourd'hui focalisé sur le Platform Engineering.</p>
+    <div class="contact-bar">
+      <span class="contact-item"><span class="ci-icon">📍</span>Montigny-lès-Cormeilles (95370)</span>
+      <a href="tel:0677704040" class="contact-item"><span class="ci-icon">📞</span>06.77.70.40.40</a>
+      <a href="mailto:david.esteban@live.fr" class="contact-item"><span class="ci-icon">✉️</span>david.esteban@live.fr</a>
+      <a href="https://www.linkedin.com/in/david-esteban-123b93103/" target="_blank" class="contact-item"><span class="ci-icon">🔗</span>linkedin.com/in/david-esteban-123b93103</a>
+    </div>
   </header>
 
   <!-- ABOUT -->
@@ -590,6 +772,8 @@
         <p>Je viens du terrain. Avant de designer des plateformes, j'ai passé des années à <strong>opérer des systèmes en production</strong>, à être bipé la nuit, à debugger des clusters à chaud. C'est cette expérience SRE/DevOps de première ligne qui façonne mon approche du platform engineering aujourd'hui.</p>
 
         <p><strong>Moins de friction, plus d'autonomie.</strong> Chaque brique que je pose doit simplifier la vie de ceux qui livrent du code. Golden paths, self-service, GitOps — tout converge vers un seul objectif : que les équipes shippent vite et en sécurité, sans dépendance ni attente.</p>
+
+        <p>Expertise en <strong>Platform Engineering</strong>, Kubernetes, GitLab CI, Terraform, Observabilité, Sécurité (DevSecOps), Virtualisation et Cloud hybride.</p>
 
         <div class="diff-block">
           <div class="diff-title">Ce qui me différencie</div>
@@ -612,7 +796,7 @@
               <span class="diff-icon">🔐</span>
               <div>
                 <strong>Security-aware</strong>
-                <p>Analyse de CVE, re-encryption TLS, collaboration étroite avec les équipes sécu — la sécurité n'est pas un afterthought, c'est intégré dès le design.</p>
+                <p>Analyse de CVE, re-encryption TLS, intégration Vault/VSO, Trivy/SAST dans les pipelines — la sécurité n'est pas un afterthought, c'est intégré dès le design.</p>
               </div>
             </div>
             <div class="diff-item">
@@ -628,39 +812,39 @@
     </div>
   </section>
 
-  <!-- STACK TECHNIQUE -->
+  <!-- DOMAINES DE PRÉDILECTION -->
   <section class="domains-section">
     <div class="section-title">// Domaines de prédilection</div>
     <div class="domains-grid">
       <div class="domain-card" style="--domain-color: var(--accent-cyan);">
         <div class="domain-icon">☸️</div>
         <h3>Kubernetes & Container Orchestration</h3>
-        <p>Clusters multi-environnements, RKE2, Cluster API avec Cluster Autoscaler, gestion du lifecycle, upgrades zero-downtime, etcd recovery. Le socle de tout ce que je construis.</p>
+        <p>Clusters multi-environnements, RKE2, Cluster API (CAPI) sur Scaleway/OVH, gestion du lifecycle, upgrades zero-downtime, etcd recovery. Le socle de tout ce que je construis.</p>
       </div>
       <div class="domain-card" style="--domain-color: var(--accent-teal);">
         <div class="domain-icon">🔄</div>
         <h3>GitOps & CI/CD</h3>
-        <p>ArgoCD comme source de vérité, GitLab CI pipelines industrialisées, sync waves, app-of-apps pattern. Le code drive l'infra, pas l'inverse.</p>
+        <p>ArgoCD comme source de vérité, GitLab CI pipelines industrialisées, sync waves, app-of-apps pattern, multi-tenancy. Le code drive l'infra, pas l'inverse.</p>
       </div>
       <div class="domain-card" style="--domain-color: var(--accent-purple);">
         <div class="domain-icon">🏗️</div>
         <h3>Infrastructure as Code</h3>
-        <p>Crossplane compositions, XRDs, providers Scaleway — de l'infra déclarative, versionnée, reviewable, qui vit dans Git comme le reste du code.</p>
+        <p>Crossplane compositions, XRDs, Terraform/OpenTofu, Ansible, AWX — de l'infra déclarative, versionnée, reviewable, qui vit dans Git comme le reste du code.</p>
       </div>
       <div class="domain-card" style="--domain-color: var(--accent-orange);">
         <div class="domain-icon">📊</div>
         <h3>Observabilité & Monitoring</h3>
-        <p>kube-prometheus-stack, Grafana dashboards, Hubble pour la couche réseau, alerting intelligent. Pas juste des métriques — de la visibilité actionnable.</p>
+        <p>kube-prometheus-stack, Thanos, Grafana dashboards, ElasticSearch/Kibana, Hubble pour la couche réseau. Pas juste des métriques — de la visibilité actionnable.</p>
       </div>
       <div class="domain-card" style="--domain-color: #ef4444;">
         <div class="domain-icon">🔐</div>
         <h3>Sécurité Cloud Native</h3>
-        <p>Analyse CVE proactive, re-encryption TLS end-to-end, NetworkPolicies Cilium, scans d'images dans la CI. La sécu intégrée dans le workflow, pas à côté.</p>
+        <p>HashiCorp Vault/VSO, Authentik/Keycloak, DefectDojo, Trivy Operator, SAST/DAST, NetworkPolicies Cilium. La sécu intégrée dans le workflow, pas à côté.</p>
       </div>
       <div class="domain-card" style="--domain-color: #22c55e;">
         <div class="domain-icon">🐘</div>
         <h3>Database Cloud Native</h3>
-        <p>CloudNativePG sur Kubernetes, backup Barman vers S3, provisioning self-service via Crossplane. PostgreSQL en prod, opéré comme du code.</p>
+        <p>CloudNativePG, YugabyteDB, MariaDB Operator sur Kubernetes, backup Barman vers S3, haute disponibilité et réplication. PostgreSQL en prod, opéré comme du code.</p>
       </div>
     </div>
   </section>
@@ -668,107 +852,338 @@
   <!-- STACK TECHNIQUE -->
   <section class="stack-section">
     <div class="section-title">// Stack technique</div>
-    <div class="stack-grid">
-      <div class="stack-item">
-        <span class="icon">☸️</span>
-        <span class="name">Kubernetes</span>
-        <span class="category">Orchestration</span>
+
+    <div class="stack-category">
+      <div class="stack-category-title">Kubernetes & Platform Engineering</div>
+      <div class="stack-grid">
+        <div class="stack-item">
+          <span class="icon">☸️</span>
+          <span class="name">Kubernetes</span>
+          <span class="category">Orchestration</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">⚙️</span>
+          <span class="name">Cluster API</span>
+          <span class="category">K8s Lifecycle</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🚀</span>
+          <span class="name">ArgoCD</span>
+          <span class="category">GitOps</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔀</span>
+          <span class="name">GitLab CI/CD</span>
+          <span class="category">Pipeline</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🧩</span>
+          <span class="name">Crossplane</span>
+          <span class="category">IaC / Control Plane</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🎭</span>
+          <span class="name">Backstage</span>
+          <span class="category">Dev Portal</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">⛵</span>
+          <span class="name">Helm</span>
+          <span class="category">Packaging</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔁</span>
+          <span class="name">Renovate</span>
+          <span class="category">Dependency Mgmt</span>
+        </div>
       </div>
-      <div class="stack-item">
-        <span class="icon">🟠</span>
-        <span class="name">EKS</span>
-        <span class="category">AWS Managed K8s</span>
+    </div>
+
+    <div class="stack-category">
+      <div class="stack-category-title">Réseau & Sécurité</div>
+      <div class="stack-grid">
+        <div class="stack-item">
+          <span class="icon">🛡️</span>
+          <span class="name">Cilium</span>
+          <span class="category">Networking / eBPF</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">👁️</span>
+          <span class="name">Hubble</span>
+          <span class="category">Network Obs.</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🌉</span>
+          <span class="name">Gateway API</span>
+          <span class="category">Ingress / Mesh</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔑</span>
+          <span class="name">Vault / VSO</span>
+          <span class="category">Secrets Mgmt</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔐</span>
+          <span class="name">Authentik</span>
+          <span class="category">IAM / SSO</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🗝️</span>
+          <span class="name">Keycloak</span>
+          <span class="category">IAM / SSO</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🐛</span>
+          <span class="name">DefectDojo</span>
+          <span class="category">Vuln. Mgmt</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔬</span>
+          <span class="name">Trivy Operator</span>
+          <span class="category">Security Scan</span>
+        </div>
       </div>
-      <div class="stack-item">
-        <span class="icon">🔵</span>
-        <span class="name">AKS</span>
-        <span class="category">Azure Managed K8s</span>
+    </div>
+
+    <div class="stack-category">
+      <div class="stack-category-title">Observabilité & Monitoring</div>
+      <div class="stack-grid">
+        <div class="stack-item">
+          <span class="icon">📊</span>
+          <span class="name">Grafana</span>
+          <span class="category">Dashboards</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔭</span>
+          <span class="name">Prometheus</span>
+          <span class="category">Metrics</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🌌</span>
+          <span class="name">Thanos</span>
+          <span class="category">Long-term Storage</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔍</span>
+          <span class="name">ElasticSearch</span>
+          <span class="category">Logs & Search</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">📈</span>
+          <span class="name">VictoriaMetrics</span>
+          <span class="category">Metrics Store</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔭</span>
+          <span class="name">OpenTelemetry</span>
+          <span class="category">Traces & Metrics</span>
+        </div>
       </div>
-      <div class="stack-item">
-        <span class="icon">⚙️</span>
-        <span class="name">Cluster API</span>
-        <span class="category">K8s Lifecycle</span>
+    </div>
+
+    <div class="stack-category">
+      <div class="stack-category-title">Cloud, Infrastructure & Automatisation</div>
+      <div class="stack-grid">
+        <div class="stack-item">
+          <span class="icon">🌐</span>
+          <span class="name">Scaleway</span>
+          <span class="category">Cloud Provider</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🟠</span>
+          <span class="name">AWS</span>
+          <span class="category">Cloud Provider</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔵</span>
+          <span class="name">Azure</span>
+          <span class="category">Cloud Provider</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🖥️</span>
+          <span class="name">VMware vSphere</span>
+          <span class="category">Virtualisation</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">☁️</span>
+          <span class="name">OpenStack</span>
+          <span class="category">Cloud Privé</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">📜</span>
+          <span class="name">Terraform</span>
+          <span class="category">IaC</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🤖</span>
+          <span class="name">Ansible / AWX</span>
+          <span class="category">Automatisation</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🔄</span>
+          <span class="name">Kured</span>
+          <span class="category">Node Reboots</span>
+        </div>
       </div>
-      <div class="stack-item">
-        <span class="icon">🚀</span>
-        <span class="name">ArgoCD</span>
-        <span class="category">GitOps</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">🔀</span>
-        <span class="name">GitLab CI/CD</span>
-        <span class="category">Pipeline</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">🧩</span>
-        <span class="name">Crossplane</span>
-        <span class="category">IaC / Control Plane</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">🛡️</span>
-        <span class="name">Cilium</span>
-        <span class="category">Networking / eBPF</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">🐘</span>
-        <span class="name">CloudNativePG</span>
-        <span class="category">Database</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">🎭</span>
-        <span class="name">Backstage</span>
-        <span class="category">Dev Portal</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">🌐</span>
-        <span class="name">Scaleway</span>
-        <span class="category">Cloud Provider</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">🐄</span>
-        <span class="name">Rancher / RKE2</span>
-        <span class="category">K8s Management</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">📊</span>
-        <span class="name">Grafana</span>
-        <span class="category">Observability</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">🔭</span>
-        <span class="name">OpenTelemetry</span>
-        <span class="category">Traces & Metrics</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">👁️</span>
-        <span class="name">Hubble</span>
-        <span class="category">Network Obs.</span>
-      </div>
-      <div class="stack-item">
-        <span class="icon">🌉</span>
-        <span class="name">Gateway API</span>
-        <span class="category">Ingress / Mesh</span>
+    </div>
+
+    <div class="stack-category">
+      <div class="stack-category-title">Stockage & Bases de données</div>
+      <div class="stack-grid">
+        <div class="stack-item">
+          <span class="icon">🐘</span>
+          <span class="name">CloudNativePG</span>
+          <span class="category">PostgreSQL</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🐄</span>
+          <span class="name">Rancher / RKE2</span>
+          <span class="category">K8s Management</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🗄️</span>
+          <span class="name">Longhorn</span>
+          <span class="category">Block Storage</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">📬</span>
+          <span class="name">Kafka</span>
+          <span class="category">Message Broker</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">⚡</span>
+          <span class="name">Redis</span>
+          <span class="category">Cache / Queue</span>
+        </div>
+        <div class="stack-item">
+          <span class="icon">🐬</span>
+          <span class="name">MySQL / MariaDB</span>
+          <span class="category">RDBMS</span>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- EXPERIENCE -->
   <section class="experience-section">
-    <div class="section-title">// Expérience</div>
+    <div class="section-title">// Expériences professionnelles</div>
 
+    <!-- Banque Delubac -->
     <div class="exp-card">
-      <div class="role">Tech Lead — Platform Engineering</div>
-      <div class="context">Cloud Native · Kubernetes · Self-Service Infrastructure</div>
-      <div class="desc">
-        Conception et pilotage d'une <strong>Internal Developer Platform</strong> complète : orchestration Kubernetes multi-cluster (EKS, AKS, RKE2, Scaleway) via <strong>Cluster API</strong> et Cluster Autoscaler, déploiement continu via <strong>ArgoCD</strong> en mode GitOps, provisioning d'infrastructure déclaratif avec <strong>Crossplane</strong>, et portail développeur <strong>Backstage</strong> pour l'autonomie des équipes. Gestion du réseau et de la sécurité avec <strong>Cilium</strong> et Gateway API, observabilité full-stack avec OpenTelemetry, Hubble, Prometheus et Grafana.
+      <div class="exp-header">
+        <div class="role">Tech Lead Platform Engineering / Architecte DevOps</div>
+        <span class="period">2024 → Aujourd'hui</span>
+      </div>
+      <div class="company">Banque Delubac &amp; Cie</div>
+      <div class="context">Platform Engineering · Kubernetes · GitOps · DevSecOps · Multi-Cloud</div>
+      <ul class="exp-bullets">
+        <li><strong>Leadership &amp; vision technique :</strong> définition de l'architecture cible, choix technologiques, design des plateformes Kubernetes/Cloud, et alignement des standards d'ingénierie via Catalogue de Service (Backstage).</li>
+        <li><strong>Architecture &amp; automatisation Kubernetes :</strong> conception et gestion de clusters via <strong>Cluster API (CAPI)</strong> sur Scaleway/OVH (Multi-Cloud). Mise en place de stratégies GitOps avec <strong>ArgoCD</strong> (synchronisation, promotion d'environnements, multi-tenancy).</li>
+        <li><strong>Sécurité &amp; conformité :</strong> gestion centralisée des secrets via <strong>Vault/VSO</strong>, authentification via <strong>Authentik/Keycloak</strong>, intégration du scanning et de la compliance avec <strong>Trivy/Trivy Operator/SAST/Lint</strong> (images, IaC, vulnérabilités). Pilotage de la gestion des risques applicatifs via <strong>DefectDojo</strong>. Gestion des mises à jour via <strong>Kured/AWX/Renovate</strong>.</li>
+        <li><strong>Fiabilité &amp; performance :</strong> responsable des SLA/SLO/SLI, optimisation de la disponibilité, mise en place de mécanismes de résilience, observabilité, alerting et automatisation (via <strong>Prometheus/Thanos/ElasticSearch</strong>).</li>
+        <li><strong>Accompagnement de l'équipe :</strong> mentoring quotidien, revue de design, diffusion des bonnes pratiques DevOps/DevSecOps et amélioration continue.</li>
+        <li><strong>Exécution &amp; delivery agile :</strong> animation des Daily/Weekly, structuration du backlog technique, coordination avec les équipes développement, sécurité et infra.</li>
+        <li><strong>Process &amp; gouvernance :</strong> industrialisation des workflows (IaC, GitOps, sécurité), formalisation des processus d'exploitation et amélioration continue.</li>
+        <li><strong>Pilotage transverse :</strong> prise de décision sur incidents majeurs, communication avec les parties prenantes, réduction de la dette technique.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag hl">Kubernetes</span>
+        <span class="exp-tag hl">Cluster API</span>
+        <span class="exp-tag hl">ArgoCD</span>
+        <span class="exp-tag hl">Cilium</span>
+        <span class="exp-tag hl">Vault/VSO</span>
+        <span class="exp-tag hl">Backstage</span>
+        <span class="exp-tag">Crossplane</span>
+        <span class="exp-tag">Authentik</span>
+        <span class="exp-tag">Keycloak</span>
+        <span class="exp-tag">DefectDojo</span>
+        <span class="exp-tag">Trivy</span>
+        <span class="exp-tag">Thanos</span>
+        <span class="exp-tag">Renovate</span>
+        <span class="exp-tag">Scaleway</span>
+        <span class="exp-tag">OVH</span>
       </div>
     </div>
 
+    <!-- Axians -->
     <div class="exp-card">
-      <div class="role">Tech Lead — DevOps & SRE</div>
-      <div class="context">CI/CD · Automatisation · Sécurité · Multi-Cloud</div>
-      <div class="desc">
-        Mise en place et industrialisation de pipelines <strong>GitLab CI/CD</strong>, intégration de linting (hadolint), scans de sécurité (CVE), et gouvernance des builds Docker. Pilotage de migrations d'infrastructure multi-cloud. Analyse proactive de vulnérabilités (IngressNightmare CVE-2025-1974, faux positifs SQLite/CNPG). Référent technique auprès des équipes sécurité pour la remédiation et la conformité.
+      <div class="exp-header">
+        <div class="role">Tech Lead Platform Engineering / Architecte DevOps</div>
+        <span class="period">2022 → 2024</span>
+      </div>
+      <div class="company">Axians Cloud Service Provider</div>
+      <div class="context">Architecture · CI/CD · Kubernetes · Observabilité · Sécurité · Cloud Hybrid</div>
+      <ul class="exp-bullets">
+        <li>Encadrement technique et mentoring d'une équipe plateforme (architecture, CI/CD, Kubernetes, observabilité, sécurité, Cloud Hybrid).</li>
+        <li>Responsable de la stabilité et disponibilité des services, suivi et respect des SLA/SLI/SLO.</li>
+        <li>Conception et mise en place d'architectures robustes (scalabilité, tolérance aux pannes, automatisation de l'infrastructure).</li>
+        <li>Définition des standards et bonnes pratiques : GitOps, sécurité by design, infrastructure as code, revue de code, guidelines opérationnelles.</li>
+        <li>Coordination transverse avec les équipes projet, sécurité, réseau et développement.</li>
+        <li>Priorisation backlog technique, accompagnement au change et amélioration continue.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag hl">Kubernetes</span>
+        <span class="exp-tag hl">GitOps</span>
+        <span class="exp-tag hl">CI/CD</span>
+        <span class="exp-tag">Architecture</span>
+        <span class="exp-tag">Cloud Hybrid</span>
+        <span class="exp-tag">Sécurité</span>
+        <span class="exp-tag">Mentoring</span>
+      </div>
+    </div>
+
+    <!-- Orange Business Services -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="role">Tech Lead DevOps / Architecte</div>
+        <span class="period">2016 → 2022</span>
+      </div>
+      <div class="company">Orange Business Services</div>
+      <div class="context">Infrastructure · DevOps · DevSecOps · Virtualisation · Multi-stack</div>
+      <ul class="exp-bullets">
+        <li>Architecture, déploiement et gestion de l'infrastructure multi-technologie.</li>
+        <li><strong>BDD :</strong> MySQL, PostgreSQL — <strong>NoSQL :</strong> MongoDB, Elasticsearch — <strong>Stockage :</strong> GlusterFS, NFS, S3.</li>
+        <li><strong>Front :</strong> Nginx, Apache — <strong>Back :</strong> PHP, Node.js, Java — <strong>Broker :</strong> Kafka, Redis.</li>
+        <li><strong>Monitoring :</strong> Prometheus, Thanos, Grafana, Elastic, Centreon.</li>
+        <li><strong>DevOps :</strong> Ansible, AWX, Kubernetes/Docker, Flexible Engine, GitLab.</li>
+        <li><strong>DevSecOps :</strong> Zap, Trivy, Neuvector, SonarQube, CheckMarx.</li>
+        <li><strong>Virtualisation :</strong> VMware Cloud, OpenStack, vCenter — <strong>Haute dispo :</strong> HAProxy, Cluster RedHat.</li>
+        <li><strong>Sécurité :</strong> VPN Fortinet, WAF (Apache mod_security), Elastic, Vault — création d'images Docker et paquets Helm.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag hl">Kubernetes</span>
+        <span class="exp-tag hl">Ansible / AWX</span>
+        <span class="exp-tag hl">GitLab CI</span>
+        <span class="exp-tag">VMware</span>
+        <span class="exp-tag">OpenStack</span>
+        <span class="exp-tag">Kafka</span>
+        <span class="exp-tag">Redis</span>
+        <span class="exp-tag">Elasticsearch</span>
+        <span class="exp-tag">Prometheus</span>
+        <span class="exp-tag">SonarQube</span>
+        <span class="exp-tag">Trivy</span>
+        <span class="exp-tag">HAProxy</span>
+      </div>
+    </div>
+
+    <!-- Edenred -->
+    <div class="exp-card">
+      <div class="exp-header">
+        <div class="role">Ingénieur Production</div>
+        <span class="period">2012 → 2016</span>
+      </div>
+      <div class="company">Edenred</div>
+      <div class="context">Administration Système · Virtualisation · Infrastructure</div>
+      <ul class="exp-bullets">
+        <li>Administration Linux/Windows, VMware, supervision, automatisation.</li>
+        <li>Refonte des architectures réseau et stockage.</li>
+      </ul>
+      <div class="exp-tags">
+        <span class="exp-tag">Linux</span>
+        <span class="exp-tag">Windows Server</span>
+        <span class="exp-tag">VMware</span>
+        <span class="exp-tag">Infrastructure</span>
+        <span class="exp-tag">Supervision</span>
       </div>
     </div>
   </section>
@@ -785,8 +1200,8 @@
         <div class="tech-tags">
           <span class="tech-tag highlight">Cluster API</span>
           <span class="tech-tag highlight">Crossplane</span>
-          <span class="tech-tag">EKS</span>
-          <span class="tech-tag">AKS</span>
+          <span class="tech-tag">Scaleway</span>
+          <span class="tech-tag">OVH</span>
           <span class="tech-tag">Cluster Autoscaler</span>
         </div>
       </div>
@@ -794,12 +1209,24 @@
       <div class="project-card">
         <span class="proj-icon">🔄</span>
         <h3>GitOps at Scale</h3>
-        <p>Mise en place d'une architecture GitOps complète avec ArgoCD : app-of-apps, sync waves, multi-cluster, gestion des secrets et promotion d'environnements automatisée.</p>
+        <p>Mise en place d'une architecture GitOps complète avec ArgoCD : app-of-apps, ApplicationSets, sync waves, multi-cluster, gestion des secrets et promotion d'environnements automatisée.</p>
         <div class="tech-tags">
           <span class="tech-tag highlight">ArgoCD</span>
           <span class="tech-tag highlight">GitLab CI</span>
-          <span class="tech-tag">Kustomize</span>
           <span class="tech-tag">Helm</span>
+          <span class="tech-tag">Kustomize</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="proj-icon">🔐</span>
+        <h3>Internal Developer Platform</h3>
+        <p>Conception et pilotage d'une IDP complète avec Backstage pour le catalogue de services, self-service infrastructure, golden paths et documentation centralisée.</p>
+        <div class="tech-tags">
+          <span class="tech-tag highlight">Backstage</span>
+          <span class="tech-tag highlight">Crossplane</span>
+          <span class="tech-tag">Vault</span>
+          <span class="tech-tag">Authentik</span>
         </div>
       </div>
 
@@ -808,22 +1235,10 @@
         <h3>Migration Azure → Scaleway</h3>
         <p>Pilotage de la migration d'infrastructure d'Azure (AKS) vers Scaleway : refonte des pipelines, adaptation des workloads, déploiement via Cluster API, migration des données et bascule progressive sans interruption de service.</p>
         <div class="tech-tags">
-          <span class="tech-tag highlight">AKS</span>
           <span class="tech-tag highlight">Scaleway</span>
+          <span class="tech-tag highlight">AKS</span>
           <span class="tech-tag">Migration</span>
           <span class="tech-tag">Zero-downtime</span>
-        </div>
-      </div>
-
-      <div class="project-card">
-        <span class="proj-icon">🌍</span>
-        <h3>Stratégie Multi-Cloud</h3>
-        <p>Design et implémentation d'une architecture multi-cloud (AWS, Azure, Scaleway) avec abstraction des providers via Crossplane, networking unifié Cilium et observabilité centralisée.</p>
-        <div class="tech-tags">
-          <span class="tech-tag highlight">Multi-Cloud</span>
-          <span class="tech-tag highlight">Crossplane</span>
-          <span class="tech-tag">Cilium</span>
-          <span class="tech-tag">OpenTelemetry</span>
         </div>
       </div>
 
@@ -856,10 +1271,52 @@
         </div>
       </div>
       <div class="soft-card">
+        <span class="soft-icon">👥</span>
+        <div>
+          <h4>Mentoring &amp; Équipe</h4>
+          <p>Accompagnement quotidien, revue de design, diffusion des bonnes pratiques et amélioration continue.</p>
+        </div>
+      </div>
+      <div class="soft-card">
         <span class="soft-icon">📚</span>
         <div>
-          <h4>Documentation & partage</h4>
+          <h4>Documentation &amp; partage</h4>
           <p>Culture de la documentation technique et du knowledge sharing au sein des équipes.</p>
+        </div>
+      </div>
+      <div class="soft-card">
+        <span class="soft-icon">⚡</span>
+        <div>
+          <h4>Delivery agile</h4>
+          <p>Animation des Daily/Weekly, structuration du backlog technique, coordination pluridisciplinaire.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMATION -->
+  <section class="formation-section">
+    <div class="section-title">// Formation</div>
+    <div class="formation-grid">
+      <div class="formation-card">
+        <div class="formation-year">2012</div>
+        <div class="formation-info">
+          <h4>Master Systèmes &amp; Réseaux</h4>
+          <p>ERE-AFTI Orsay</p>
+        </div>
+      </div>
+      <div class="formation-card">
+        <div class="formation-year">2010</div>
+        <div class="formation-info">
+          <h4>BTS Informatique et Réseau</h4>
+          <p>Systèmes d'information &amp; réseaux</p>
+        </div>
+      </div>
+      <div class="formation-card">
+        <div class="formation-year">2008</div>
+        <div class="formation-info">
+          <h4>Bac STI Génie Électronique</h4>
+          <p>Sciences et Technologies Industrielles</p>
         </div>
       </div>
     </div>
